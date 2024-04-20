@@ -111,7 +111,7 @@ const register = async (req, res) => {
     let ip = ipAddress(req);
     let time = timeCreate();
 
-    if (!username || !pwd) {
+    if (!username || !pwd || !invitecode) {
         return res.status(200).json({
             message: 'ERROR!!!',
             status: false
