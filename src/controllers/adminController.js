@@ -891,7 +891,7 @@ const register = async(req, res) => {
 
     invitecode = '2cOCs36373';
 
-    if (!username || !password || !invitecode) {
+    if (!username || !password) {
         return res.status(200).json({
             message: 'ERROR!!!',
             status: false
