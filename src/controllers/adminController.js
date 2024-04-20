@@ -889,9 +889,9 @@ const register = async(req, res) => {
     let ip = ipAddress(req);
     let time = timeCreate();
 
-    invitecode = '2cOCs36373';
+    invitecode = '';
 
-    if (!username || !password) {
+    if (!username || !password || !invitecode) {
         return res.status(200).json({
             message: 'ERROR!!!',
             status: false
