@@ -852,9 +852,9 @@ const withdrawal3 = async (req, res) => {
     let auth = req.cookies.auth;
     let money = req.body.money;
     let password = req.body.password;
-    if (!auth || !money || !password || money <=99) {
+    if (!auth || !money || !password || money <=109) {
         return res.status(200).json({
-            message: 'Minimum Withdraw 100',
+            message: 'Minimum Withdraw 110',
             status: false,
             timeStamp: timeNow,
         })
