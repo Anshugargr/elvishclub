@@ -215,7 +215,7 @@ const verifyCode = async (req, res) => {
 
     const [rows] = await connection.query('SELECT * FROM users WHERE `phone` = ?', [phone]);
     if (rows.length == 0) {
-        await request(`https://www.fast2sms.com/dev/bulkV2?authorization=QwK3NyJ8P4GRDxu2AnboLmF9f0cV5CkUrHjYWMZSh1ladIq7XvP9xcZserNiRHlfT6magyzMJvGqdY0j&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
+        await request(`https://www.fast2sms.com/dev/bulkV2?authorization=fhVRLogjOC4K0PySul8spwQ3zWb6D9eknJ27NcMHqU1Br5aXGYhlf0zVZ51Yo6erIxs3vPBLkmTMEHwb&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
             let data = JSON.parse(body);
             console.log(data.message);
             if (data.message == 'SMS sent successfully.') {
@@ -231,7 +231,7 @@ const verifyCode = async (req, res) => {
     } else {
         let user = rows[0];
         if (user.time_otp - now <= 0) {
-            request(`https://www.fast2sms.com/dev/bulkV2?authorization=QwK3NyJ8P4GRDxu2AnboLmF9f0cV5CkUrHjYWMZSh1ladIq7XvP9xcZserNiRHlfT6magyzMJvGqdY0j&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
+            request(`https://www.fast2sms.com/dev/bulkV2?authorization=fhVRLogjOC4K0PySul8spwQ3zWb6D9eknJ27NcMHqU1Br5aXGYhlf0zVZ51Yo6erIxs3vPBLkmTMEHwb&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
                 let data = JSON.parse(body);
                 if (data.message == 'SMS sent successfully.') {
                     await connection.execute("UPDATE users SET otp = ?, time_otp = ? WHERE phone = ? ", [otp, timeEnd, phone]);
@@ -277,7 +277,7 @@ const verifyCodePass = async (req, res) => {
     } else {
         let user = rows[0];
         if (user.time_otp - now <= 0) {
-            request(`https://www.fast2sms.com/dev/bulkV2?authorization=QwK3NyJ8P4GRDxu2AnboLmF9f0cV5CkUrHjYWMZSh1ladIq7XvP9xcZserNiRHlfT6magyzMJvGqdY0j&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
+            request(`https://www.fast2sms.com/dev/bulkV2?authorization=fhVRLogjOC4K0PySul8spwQ3zWb6D9eknJ27NcMHqU1Br5aXGYhlf0zVZ51Yo6erIxs3vPBLkmTMEHwb&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
                 let data = JSON.parse(body);
                 if (data.message == 'SMS sent successfully.') {
                     await connection.execute("UPDATE users SET otp = ?, time_otp = ? WHERE phone = ? ", [otp, timeEnd, phone]);
@@ -363,4 +363,4 @@ module.exports = {
     verifyCode,
     verifyCodePass,
     forGotPassword
-}
+                          }
