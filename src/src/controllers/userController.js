@@ -27,7 +27,7 @@ const verifyCode = async (req, res) => {
     }
     let user = rows[0];
     if (user.time_otp - now <= 0) {
-        request(`https://dvhosting.in/api-sms-v1.php?authorization=4b74dce10aXX&variables_values=${otp}&route=otp&numbers=${phone}
+        request(`https://dvhosting.in/api-sms-v1.php?authorization=4b74dce10aXX&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
             let data = JSON.parse(body);
             if (data.code == '00000') {
                 await connection.execute("UPDATE users SET otp = ?, time_otp = ? WHERE phone = ? ", [otp, timeEnd, user.phone]);
