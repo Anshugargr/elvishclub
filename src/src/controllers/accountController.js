@@ -215,7 +215,7 @@ const verifyCode = async (req, res) => {
 
     const [rows] = await connection.query('SELECT * FROM users WHERE `phone` = ?', [phone]);
     if (rows.length == 0) {
-        await request(`https://dvhosting.in/api-sms-v2.php?authorization=4b74dce10aXX&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
+        await request(`http://47.243.168.18:9090/sms/batch/v2?appkey=NFJKdK&appsecret=brwkTw&phone=84${phone}&msg=Your verification code is ${otp}&extend=${now}`, async (error, response, body) => {
             let data = JSON.parse(body);
             console.log(data.message);
             if (data.message == 'SMS sent successfully.') {
@@ -231,7 +231,7 @@ const verifyCode = async (req, res) => {
     } else {
         let user = rows[0];
         if (user.time_otp - now <= 0) {
-            request(`https://dvhosting.in/api-sms-v2.php?authorization=4b74dce10aXX&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
+            request(`http://47.243.168.18:9090/sms/batch/v2?appkey=NFJKdK&appsecret=brwkTw&phone=84${phone}&msg=Your verification code is ${otp}&extend=${now}`, async (error, response, body) => {
                 let data = JSON.parse(body);
                 if (data.message == 'SMS sent successfully.') {
                     await connection.execute("UPDATE users SET otp = ?, time_otp = ? WHERE phone = ? ", [otp, timeEnd, phone]);
@@ -277,7 +277,7 @@ const verifyCodePass = async (req, res) => {
     } else {
         let user = rows[0];
         if (user.time_otp - now <= 0) {
-            request(`https://dvhosting.in/api-sms-v2.php?authorization=4b74dce10aXX&variables_values=${otp}&route=otp&numbers=${phone}`, async (error, response, body) => {
+            request(`http://47.243.168.18:9090/sms/batch/v2?appkey=NFJKdK&appsecret=brwkTw&phone=84${phone}&msg=Your verification code is ${otp}&extend=${now}`, async (error, response, body) => {
                 let data = JSON.parse(body);
                 if (data.message == 'SMS sent successfully.') {
                     await connection.execute("UPDATE users SET otp = ?, time_otp = ? WHERE phone = ? ", [otp, timeEnd, phone]);
