@@ -235,7 +235,7 @@ const betWinGo = async (req, res) => {
         let f4 = (total_m / 100) * level0.f4;
         await connection.execute(sql2, [userInfo.phone, userInfo.code, userInfo.invite, f1, f2, f3, f4, timeNow]);
         return res.status(200).json({
-            message: 'Successful bet',
+            message: 'Success',
             status: true,
             data: result,
             change: users[0].level,
