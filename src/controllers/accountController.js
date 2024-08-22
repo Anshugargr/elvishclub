@@ -140,15 +140,7 @@ const register = async (req, res) => {
             return res.status(200).json({
                 message: 'Registered phone number',
                 status: false
-            });
-        } else {
-            const [rows] = await connection.query('SELECT * FROM users WHERE `phone` = ?', [username]);
-            if (rows.length == 0) {
-                return res.status(200).json({
-                    message: 'otp error',
-                    status: false,
-                    timeStamp: timeNow,
-                });
+            });                                                                                                                    
             } else {
                 let user = rows[0];
                 if (user.time_otp - now > 0) {
